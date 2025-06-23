@@ -4,7 +4,106 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chic Casual DZ</title>
-  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    header, main, footer {
+      padding: 20px;
+      margin: 10px;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff0f4;
+    }
+    .logo {
+      font-size: 1.5em;
+      color: #e91e63;
+      font-weight: bold;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+    }
+    nav a:hover {
+      color: #e91e63;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .product {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      text-align: center;
+      background: #fff;
+      padding: 10px;
+    }
+    .product img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .add-to-cart {
+      margin-top: 10px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .add-to-cart:hover {
+      background-color: #c2185b;
+    }
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .close-btn {
+      float: left;
+      font-size: 1.2em;
+      cursor: pointer;
+      color: #e91e63;
+    }
+    #cart-items p {
+      border-bottom: 1px solid #eee;
+      padding: 5px 0;
+    }
+    footer {
+      font-size: 0.9em;
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+  </style>
 </head>
 <body>
 
@@ -18,70 +117,51 @@
       <a href="#contact">اتصل بنا</a>
       <a href="#" id="view-cart">المشتريات (<span id="cart-count">0</span>)</a>
     </nav>
-    <div class="cart">🛒</div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main -->
   <main>
 
-    <!-- Clothing Category -->
+    <!-- Clothing -->
     <section class="category" id="clothing">
       <h2>الملابس</h2>
       <div class="products">
-
-        <div class="product" data-id="1" data-name="فستان زهري بأزرار" data-price="1500" data-img="https://i.imgur.com/ua7TTiJ.jpg">
-          <img src="https://i.imgur.com/ua7TTiJ.jpg" alt="فستان زهري أنيق">
+        <div class="product" data-name="فستان زهري بأزرار" data-price="1500">
+          <img src="https://i.imgur.com/ua7TTiJ.jpg" alt="فستان زهري">
           <h3>فستان زهري بأزرار</h3>
-          <p class="price">السعر: 1500 دج</p>
+          <p>السعر: 1500 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
 
-        <div class="product" data-id="2" data-name="قميص كاجوال" data-price="800" data-img="https://via.placeholder.com/300x220.png?text=قميص">
+        <div class="product" data-name="قميص كاجوال" data-price="800">
           <img src="https://via.placeholder.com/300x220.png?text=قميص" alt="قميص">
           <h3>قميص كاجوال</h3>
-          <p class="price">السعر: 800 دج</p>
+          <p>السعر: 800 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
-
-        <div class="product" data-id="3" data-name="بنطال جينز خفيف" data-price="1200" data-img="https://via.placeholder.com/300x220.png?text=جينز">
-          <img src="https://via.placeholder.com/300x220.png?text=جينز" alt="جينز">
-          <h3>بنطال جينز خفيف</h3>
-          <p class="price">السعر: 1200 دج</p>
-          <button class="add-to-cart">أضف إلى السلة</button>
-        </div>
-
       </div>
     </section>
 
-    <!-- Shoes Category -->
+    <!-- Shoes -->
     <section class="category" id="shoes">
       <h2>الأحذية</h2>
       <div class="products">
-
-        <div class="product" data-id="4" data-name="حذاء رياضي نسائي" data-price="2000" data-img="https://via.placeholder.com/300x220.png?text=حذاء+1">
+        <div class="product" data-name="حذاء رياضي نسائي" data-price="2000">
           <img src="https://via.placeholder.com/300x220.png?text=حذاء+1" alt="حذاء رياضي">
           <h3>حذاء رياضي نسائي</h3>
-          <p class="price">السعر: 2000 دج</p>
+          <p>السعر: 2000 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
-
-        <div class="product" data-id="5" data-name="حذاء كعب عالي وردي" data-price="2500" data-img="https://via.placeholder.com/300x220.png?text=حذاء+2">
-          <img src="https://via.placeholder.com/300x220.png?text=حذاء+2" alt="كعب عالي">
-          <h3>حذاء كعب عالي وردي</h3>
-          <p class="price">السعر: 2500 دج</p>
-          <button class="add-to-cart">أضف إلى السلة</button>
-        </div>
-
       </div>
     </section>
 
   </main>
 
   <!-- Cart Modal -->
-  <div id="cart-modal" class="modal hidden">
+  <div class="modal" id="cart-modal">
     <div class="modal-content">
       <span class="close-btn" id="close-cart">&times;</span>
-      <h2>المشتريات</h2>
+      <h3>سلة المشتريات</h3>
       <div id="cart-items"></div>
       <p id="cart-total"></p>
       <button id="clear-cart">تفريغ السلة</button>
@@ -99,76 +179,61 @@
     <p>© 2025 Chic Casual DZ - جميع الحقوق محفوظة</p>
   </footer>
 
-  <!-- JavaScript inline -->
+  <!-- Script -->
   <script>
-    let cart = [];
+    const cart = [];
+    const cartCount = document.getElementById('cart-count');
+    const viewCart = document.getElementById('view-cart');
+    const cartModal = document.getElementById('cart-modal');
+    const closeCart = document.getElementById('close-cart');
+    const cartItems = document.getElementById('cart-items');
+    const cartTotal = document.getElementById('cart-total');
+    const clearCartBtn = document.getElementById('clear-cart');
 
-    const addToCartButtons = document.querySelectorAll(".add-to-cart");
-    const cartCount = document.getElementById("cart-count");
-    const viewCartBtn = document.getElementById("view-cart");
-    const cartModal = document.getElementById("cart-modal");
-    const closeCartBtn = document.getElementById("close-cart");
-    const cartItemsContainer = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
-    const clearCartBtn = document.getElementById("clear-cart");
-
-    function updateCartCount() {
-      cartCount.textContent = cart.length;
-    }
-
-    function displayCartItems() {
-      cartItemsContainer.innerHTML = "";
-      let total = 0;
-
-      if (cart.length === 0) {
-        cartItemsContainer.innerHTML = "<p>السلة فارغة.</p>";
-        cartTotal.textContent = "";
-        return;
-      }
-
-      cart.forEach((item) => {
-        const itemEl = document.createElement("div");
-        itemEl.classList.add("cart-item");
-        itemEl.innerHTML = \`
-          <img src="\${item.img}" width="60" />
-          <strong>\${item.name}</strong> - \${item.price} دج
-        \`;
-        cartItemsContainer.appendChild(itemEl);
-        total += item.price;
-      });
-
-      cartTotal.textContent = \`المجموع: \${total} دج\`;
-    }
-
-    viewCartBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      displayCartItems();
-      cartModal.classList.remove("hidden");
-    });
-
-    closeCartBtn.addEventListener("click", () => {
-      cartModal.classList.add("hidden");
-    });
-
-    clearCartBtn.addEventListener("click", () => {
-      cart = [];
-      updateCartCount();
-      displayCartItems();
-    });
-
-    addToCartButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const product = btn.closest(".product");
-        const id = product.dataset.id;
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const product = e.target.closest('.product');
         const name = product.dataset.name;
         const price = parseInt(product.dataset.price);
-        const img = product.dataset.img;
 
-        cart.push({ id, name, price, img });
-        updateCartCount();
-        alert("تمت إضافة المنتج إلى السلة!");
+        cart.push({ name, price });
+        updateCartUI();
       });
     });
+
+    viewCart.addEventListener('click', e => {
+      e.preventDefault();
+      cartModal.style.display = 'flex';
+      updateCartUI();
+    });
+
+    closeCart.addEventListener('click', () => {
+      cartModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', e => {
+      if (e.target === cartModal) {
+        cartModal.style.display = 'none';
+      }
+    });
+
+    clearCartBtn.addEventListener('click', () => {
+      cart.length = 0;
+      updateCartUI();
+    });
+
+    function updateCartUI() {
+      cartCount.textContent = cart.length;
+      cartItems.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        const p = document.createElement('p');
+        p.textContent = `${item.name} - ${item.price} دج`;
+        cartItems.appendChild(p);
+        total += item.price;
+      });
+      cartTotal.textContent = `الإجمالي: ${total} دج`;
+    }
   </script>
 
 </body>

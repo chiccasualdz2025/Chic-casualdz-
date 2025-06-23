@@ -5,66 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chic Casual DZ</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    .count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #ff4081;
-      color: white;
-      border-radius: 50%;
-      padding: 2px 6px;
-      font-size: 0.8em;
-      font-weight: bold;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: #f5f5f5;
-      position: relative;
-    }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-    .cart {
-      position: relative;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      padding: 1rem;
-    }
-    .product {
-      border: 1px solid #ccc;
-      padding: 1rem;
-      border-radius: 10px;
-      text-align: center;
-      max-width: 250px;
-      background: white;
-    }
-    .price {
-      color: #e91e63;
-      font-weight: bold;
-      margin: 5px 0;
-    }
-    footer {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
-  </style>
 </head>
 <body>
 
@@ -75,12 +15,9 @@
       <a href="#">الرئيسية</a>
       <a href="#clothing">ملابس</a>
       <a href="#shoes">أحذية</a>
-      <a href="#">اتصل بنا</a>
+      <a href="#contact">اتصل بنا</a>
     </nav>
-    <div class="cart">
-      <i class="fas fa-shopping-cart"></i>
-      <span class="count">0</span>
-    </div>
+    <div class="cart">🛒</div>
   </header>
 
   <!-- Main Content -->
@@ -90,28 +27,7 @@
     <section class="category" id="clothing">
       <h2>الملابس</h2>
       <div class="products">
-
-        <div class="product">
-          <img src="https://i.imgur.com/ua7TTiJ.jpg" alt="فستان زهري بأزرار">
-          <h3>فستان زهري بأزرار</h3>
-          <p class="price">3500 دج</p>
-          <button class="add-to-cart" data-product="فستان زهري">أضف إلى السلة</button>
-        </div>
-
-        <div class="product">
-          <img src="https://via.placeholder.com/300x220.png?text=قميص" alt="قميص كاجوال">
-          <h3>قميص كاجوال</h3>
-          <p class="price">2200 دج</p>
-          <button class="add-to-cart" data-product="قميص كاجوال">أضف إلى السلة</button>
-        </div>
-
-        <div class="product">
-          <img src="https://via.placeholder.com/300x220.png?text=جينز" alt="بنطال جينز خفيف">
-          <h3>بنطال جينز خفيف</h3>
-          <p class="price">2800 دج</p>
-          <button class="add-to-cart" data-product="بنطال جينز">أضف إلى السلة</button>
-        </div>
-
+        <!-- المنتجات هنا -->
       </div>
     </section>
 
@@ -119,37 +35,44 @@
     <section class="category" id="shoes">
       <h2>الأحذية</h2>
       <div class="products">
-
-        <div class="product">
-          <img src="https://via.placeholder.com/300x220.png?text=حذاء+1" alt="حذاء رياضي نسائي">
-          <h3>حذاء رياضي نسائي</h3>
-          <p class="price">3000 دج</p>
-          <button class="add-to-cart" data-product="حذاء رياضي">أضف إلى السلة</button>
-        </div>
-
-        <div class="product">
-          <img src="https://via.placeholder.com/300x220.png?text=حذاء+2" alt="حذاء كعب عالي وردي">
-          <h3>حذاء كعب عالي وردي</h3>
-          <p class="price">4200 دج</p>
-          <button class="add-to-cart" data-product="حذاء كعب">أضف إلى السلة</button>
-        </div>
-
+        <!-- المنتجات هنا -->
       </div>
     </section>
 
   </main>
 
   <!-- Footer -->
-  <footer>
-    &copy; 2025 Chic Casual DZ - جميع الحقوق محفوظة.
+  <footer id="contact">
+    <p>📞 الهاتف: 0794196602</p>
+    <p>📍 العنوان: البليدة ، سيدي عبد القادر</p>
+    <p>📱 تابعنا: 
+      <a href="https://www.instagram.com/yourpage" target="_blank">إنستغرام</a> | 
+      <a href="https://www.facebook.com/yourpage" target="_blank">فيسبوك</a>
+    </p>
+    <p>© 2025 Chic Casual DZ - جميع الحقوق محفوظة</p>
   </footer>
 
+  <!-- Script -->
   <script>
     const cartIcon = document.querySelector('.cart');
-    const countSpan = cartIcon.querySelector('.count');
     let cartCount = 0;
 
     function updateCartCount() {
+      let countSpan = cartIcon.querySelector('.count');
+      if (!countSpan) {
+        countSpan = document.createElement('span');
+        countSpan.classList.add('count');
+        countSpan.style.position = 'absolute';
+        countSpan.style.top = '-5px';
+        countSpan.style.right = '-5px';
+        countSpan.style.background = '#ff4081';
+        countSpan.style.color = '#fff';
+        countSpan.style.borderRadius = '50%';
+        countSpan.style.padding = '2px 6px';
+        countSpan.style.fontSize = '0.75em';
+        countSpan.style.fontWeight = 'bold';
+        cartIcon.appendChild(countSpan);
+      }
       countSpan.textContent = cartCount;
     }
 

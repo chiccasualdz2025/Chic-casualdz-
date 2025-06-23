@@ -1,27 +1,26 @@
 
 body {
-  position: relative;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80');
+  background-image: url('https://images.unsplash.com/flagged/photo-1570700005880-4ecdb8595d4a?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #333;
-  z-index: 0;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  z-index: -1;
-}
-
-header {
-  background-color: #f8f8f8;
+/* خلفية شفافة للصفحات لتسهيل القراءة */
+main, header {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(3px);
+  border-radius: 10px;
+  margin: 10px;
   padding: 15px 30px;
+}
+
+/* الباقي كما هو */
+header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -71,6 +70,7 @@ main {
   overflow: hidden;
   text-align: center;
   transition: box-shadow 0.3s ease;
+  background-color: #fff;
 }
 
 .product:hover {

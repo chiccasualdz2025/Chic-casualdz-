@@ -1,6 +1,5 @@
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-const addToCartButtons = document.querySelectorAll(".add-to-cart");
 const cartCount = document.getElementById("cart-count");
 const viewCartBtn = document.getElementById("view-cart");
 const cartModal = document.getElementById("cart-modal");
@@ -11,7 +10,8 @@ const clearCartBtn = document.getElementById("clear-cart");
 
 // تحديث عدد المنتجات في العربة
 function updateCartCount() {
-  cartCount.textContent = cart.length;
+  cartCount.textContent = cart.reduce((sum, p) => sum + p.qty, 0);
+  localStorage.setItem("cart", JSON.stringify(cart));
 }
 
 // عرض محتوى السلة في النافذة المنبثقة
@@ -25,29 +25,37 @@ function displayCartItems() {
     return;
   }
 
-  cart.forEach((item) => {
+  cart.forEach((item, idx) => {
     const itemEl = document.createElement("div");
     itemEl.classList.add("cart-item");
     itemEl.innerHTML = `
-      <img src="${item.img}" width="60" />
-      <strong>${item.name}</strong> - ${item.price} دج
+      <strong>${item.name}</strong> - ${item.price} دج × ${item.qty}
+      <button onclick="removeFromCart(${idx})" style="margin-right:8px;">حذف</button>
     `;
     cartItemsContainer.appendChild(itemEl);
-    total += item.price;
+    total += item.price * item.qty;
   });
 
   cartTotal.textContent = `المجموع: ${total} دج`;
 }
 
-// فتح نافذة السلة
-viewCartBtn.addEventListener("click", () => {
+// حذف منتج من السلة
+window.removeFromCart = function(idx) {
+  cart.splice(idx, 1);
+  updateCartCount();
   displayCartItems();
-  cartModal.classList.remove("hidden");
+}
+
+// فتح نافذة السلة
+viewCartBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  displayCartItems();
+  cartModal.style.display = "flex";
 });
 
 // إغلاق نافذة السلة
 closeCartBtn.addEventListener("click", () => {
-  cartModal.classList.add("hidden");
+  cartModal.style.display = "none";
 });
 
 // تفريغ السلة
@@ -58,16 +66,19 @@ clearCartBtn.addEventListener("click", () => {
 });
 
 // إضافة المنتجات إلى السلة
-addToCartButtons.forEach((btn) => {
+document.querySelectorAll(".add-to-cart").forEach((btn) => {
   btn.addEventListener("click", () => {
     const product = btn.closest(".product");
-    const id = product.dataset.id;
     const name = product.dataset.name;
     const price = parseInt(product.dataset.price);
-    const img = product.dataset.img;
 
-    cart.push({ id, name, price, img });
+    let found = cart.find(p => p.name === name);
+    if (found) found.qty += 1;
+    else cart.push({ name, price, qty: 1 });
+
     updateCartCount();
     alert("تمت إضافة المنتج إلى السلة!");
   });
 });
+
+updateCartCount();

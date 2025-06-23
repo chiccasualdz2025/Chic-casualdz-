@@ -1,0 +1,139 @@
+// ======= عناصر مهمة =======
+const cartIcon = document.querySelector('.cart');
+const cartModal = document.getElementById('cart-modal');
+const closeCartBtn = document.getElementById('close-cart');
+const cartItemsContainer = document.getElementById('cart-items');
+const cartTotal = document.getElementById('cart-total');
+const openCartBtn = document.getElementById('view-cart');
+
+let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+// تحديث عداد السلة
+function updateCartCount() {
+  let countSpan = cartIcon.querySelector('.count');
+  const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  if (!countSpan) {
+    countSpan = document.createElement('span');
+    countSpan.classList.add('count');
+    countSpan.style.position = 'absolute';
+    countSpan.style.top = '0';
+    countSpan.style.right = '0';
+    countSpan.style.background = '#ff4081';
+    countSpan.style.color = '#fff';
+    countSpan.style.borderRadius = '50%';
+    countSpan.style.padding = '2px 6px';
+    countSpan.style.fontSize = '0.8em';
+    countSpan.style.fontWeight = 'bold';
+    cartIcon.appendChild(countSpan);
+  }
+
+  if (totalCount === 0) {
+    countSpan.style.display = 'none';
+  } else {
+    countSpan.style.display = 'inline-block';
+    countSpan.textContent = totalCount;
+  }
+}
+
+// عرض المنتجات في نافذة السلة
+function renderCartItems() {
+  cartItemsContainer.innerHTML = '';
+  let total = 0;
+
+  if(cartItems.length === 0) {
+    cartItemsContainer.innerHTML = '<p>السلة فارغة.</p>';
+    cartTotal.textContent = 'المجموع: 0 دج';
+    return;
+  }
+
+  cartItems.forEach(item => {
+    total += item.price * item.quantity;
+
+    const itemElement = document.createElement('div');
+    itemElement.classList.add('cart-item');
+    itemElement.innerHTML = `
+      <img src="${item.img}" alt="${item.name}" />
+      <div>
+        <h3>${item.name}</h3>
+        <p>السعر: ${item.price} دج</p>
+        <p>الكمية: ${item.quantity}</p>
+        <button class="remove-item" data-id="${item.id}">حذف</button>
+      </div>
+    `;
+    cartItemsContainer.appendChild(itemElement);
+  });
+
+  cartTotal.textContent = `المجموع: ${total} دج`;
+
+  // تفعيل حذف المنتج عند الضغط على زر الحذف
+  document.querySelectorAll('.remove-item').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const id = e.target.getAttribute('data-id');
+      removeFromCart(id);
+    });
+  });
+}
+
+// إضافة منتج للسلة
+function addToCart(product) {
+  const existingProduct = cartItems.find(item => item.id === product.id);
+  if (existingProduct) {
+    existingProduct.quantity += 1;
+  } else {
+    product.quantity = 1;
+    cartItems.push(product);
+  }
+  saveCart();
+  updateCartCount();
+}
+
+// حذف منتج من السلة
+function removeFromCart(id) {
+  cartItems = cartItems.filter(item => item.id !== id);
+  saveCart();
+  renderCartItems();
+  updateCartCount();
+}
+
+// حفظ السلة في localStorage
+function saveCart() {
+  localStorage.setItem('cart', JSON.stringify(cartItems));
+}
+
+// فتح السلة
+openCartBtn.addEventListener('click', e => {
+  e.preventDefault();
+  cartModal.classList.remove('hidden');
+  renderCartItems();
+});
+
+// إغلاق السلة
+closeCartBtn.addEventListener('click', () => {
+  cartModal.classList.add('hidden');
+});
+
+// إغلاق السلة عند الضغط خارج النافذة
+cartModal.addEventListener('click', e => {
+  if (e.target === cartModal) {
+    cartModal.classList.add('hidden');
+  }
+});
+
+// إضافة حدث لأزرار "أضف إلى السلة"
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const productElement = btn.closest('.product');
+    const product = {
+      id: productElement.querySelector('h3').textContent.trim(),
+      name: productElement.querySelector('h3').textContent.trim(),
+      price: parseFloat(productElement.dataset.price) || 1000, // السعر من data-price أو قيمة افتراضية
+      img: productElement.querySelector('img').src,
+    };
+    addToCart(product);
+    alert('تمت إضافة المنتج إلى السلة!');
+  });
+});
+
+// تحديث العداد عند تحميل الصفحة
+updateCartCount();

@@ -9,25 +9,16 @@ body {
   color: #333;
 }
 
-/* خلي خلفية main و header أقل شفافية */
+/* خلفية شفافة للصفحات لتسهيل القراءة */
 main, header {
-  background-color: rgba(255, 255, 255, 0.6); /* بدّلنا 0.9 إلى 0.6 */
-  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(3px);
   border-radius: 10px;
   margin: 10px;
   padding: 15px 30px;
 }
 
-/* خلفية شفافة للمحتوى */
-
-main, header {
-  background-color: rgba(255, 255, 255, 0.3); /* شفافية 30% */
-  backdrop-filter: blur(5px);
-  border-radius: 10px;
-  margin: 10px;
-  padding: 15px 30px;
-}
-/* باقي التنسيقات كما هي */
+/* الباقي كما هو */
 header {
   display: flex;
   justify-content: space-between;
@@ -68,8 +59,8 @@ main {
 
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 25px;
 }
 
 .product {
@@ -77,12 +68,13 @@ main {
   border-radius: 10px;
   overflow: hidden;
   text-align: center;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
   background-color: #fff;
 }
 
 .product:hover {
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  transform: translateY(-5px);
 }
 
 .product img {

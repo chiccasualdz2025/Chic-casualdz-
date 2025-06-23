@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Cairo', 'Segoe UI', sans-serif;
   margin: 0;
   background-image: url("https://images.unsplash.com/photo-1570700005880-4ecdb8595d4a?auto=format&fit=crop&w=1920&q=80");
   background-size: cover;
@@ -113,28 +115,6 @@ main {
   background-color: #e73370;
 }
 
-/* Footer */
-footer {
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(3px);
-  text-align: center;
-  padding: 20px;
-  border-radius: 10px;
-  margin: 20px;
-  font-size: 0.95em;
-  color: #333;
-}
-
-footer a {
-  color: #ff4081;
-  text-decoration: none;
-  margin: 0 5px;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
 /* Modal */
 .modal {
   position: fixed;
@@ -157,4 +137,89 @@ footer a:hover {
   max-width: 500px;
   max-height: 80vh;
   overflow-y: auto;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: 1.5em;
+  color: #999;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #333;
+}
+
+#clear-cart {
+  background-color: #888;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  margin-top: 15px;
+  cursor: pointer;
+}
+
+#clear-cart:hover {
+  background-color: #555;
+}
+
+/* نموذج إرسال الطلب */
+#send-order {
+  margin: 40px auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 25px;
+  border-radius: 10px;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+#send-order form input,
+#send-order form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 1em;
+}
+
+#send-order form button {
+  background-color: #ff4081;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#send-order form button:hover {
+  background-color: #e73370;
+}
+
+/* Footer */
+footer {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(3px);
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+  font-size: 0.95em;
+  color: #333;
+}
+
+footer a {
+  color: #ff4081;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }

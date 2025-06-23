@@ -8,100 +8,169 @@
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background: #f9f9f9;
+      background-image: url('https://images.unsplash.com/flagged/photo-1570700005880-4ecdb8595d4a?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       color: #333;
     }
-    header, main, footer {
-      padding: 20px;
-      margin: 10px;
-      background-color: #fff;
+    main, header {
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(3px);
       border-radius: 10px;
+      margin: 10px;
+      padding: 15px 30px;
     }
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: #fff0f4;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .logo {
       font-size: 1.5em;
-      color: #e91e63;
       font-weight: bold;
+      color: #ff4081;
     }
     nav a {
       margin: 0 10px;
       text-decoration: none;
       color: #333;
+      cursor: pointer;
     }
-    nav a:hover {
-      color: #e91e63;
+    .cart {
+      position: relative;
+      font-size: 1.2em;
+    }
+    main {
+      padding: 20px 30px;
+    }
+    .category {
+      margin: 30px 0;
+    }
+    .category h2 {
+      font-size: 1.4em;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
     }
     .products {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
+      gap: 25px;
     }
     .product {
       border: 1px solid #ddd;
       border-radius: 10px;
+      overflow: hidden;
       text-align: center;
-      background: #fff;
-      padding: 10px;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      background-color: #fff;
+      position: relative;
+    }
+    .product:hover {
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      transform: translateY(-5px);
     }
     .product img {
       width: 100%;
-      height: 180px;
+      height: 220px;
       object-fit: cover;
-      border-radius: 8px;
+    }
+    .product h3 {
+      font-size: 1em;
+      margin: 10px 0 5px 0;
+    }
+    .price {
+      margin: 0 0 10px 0;
+      color: #666;
+      font-weight: bold;
     }
     .add-to-cart {
-      margin-top: 10px;
-      background-color: #e91e63;
-      color: white;
+      background-color: #ff4081;
+      color: #fff;
       border: none;
-      padding: 8px 12px;
+      padding: 10px 15px;
+      margin-bottom: 15px;
       border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     .add-to-cart:hover {
-      background-color: #c2185b;
+      background-color: #e73370;
     }
-    /* Modal styles */
+    /* Footer */
+    footer {
+      background-color: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(3px);
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px;
+      font-size: 0.95em;
+      color: #333;
+    }
+    footer a {
+      color: #ff4081;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+    /* Modal */
     .modal {
       position: fixed;
       top: 0;
-      right: 0;
       left: 0;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
       display: none;
       justify-content: center;
       align-items: center;
-      z-index: 999;
+      z-index: 1000;
     }
     .modal-content {
       background: #fff;
-      padding: 20px;
       border-radius: 10px;
-      max-width: 500px;
+      padding: 20px;
       width: 90%;
+      max-width: 500px;
       max-height: 80vh;
       overflow-y: auto;
+      direction: rtl;
+      text-align: right;
     }
     .close-btn {
       float: left;
-      font-size: 1.2em;
+      font-size: 1.5em;
       cursor: pointer;
-      color: #e91e63;
+      color: #ff4081;
+      font-weight: bold;
     }
     #cart-items p {
       border-bottom: 1px solid #eee;
       padding: 5px 0;
+      margin: 0;
     }
-    footer {
-      font-size: 0.9em;
-      text-align: center;
-      background-color: #f1f1f1;
+    #cart-total {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    #clear-cart {
+      margin-top: 15px;
+      background-color: #ff4081;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 1em;
+    }
+    #clear-cart:hover {
+      background-color: #e73370;
     }
   </style>
 </head>
@@ -129,14 +198,14 @@
         <div class="product" data-name="فستان زهري بأزرار" data-price="1500">
           <img src="https://i.imgur.com/ua7TTiJ.jpg" alt="فستان زهري">
           <h3>فستان زهري بأزرار</h3>
-          <p>السعر: 1500 دج</p>
+          <p class="price">السعر: 1500 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
 
         <div class="product" data-name="قميص كاجوال" data-price="800">
           <img src="https://via.placeholder.com/300x220.png?text=قميص" alt="قميص">
           <h3>قميص كاجوال</h3>
-          <p>السعر: 800 دج</p>
+          <p class="price">السعر: 800 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
       </div>
@@ -149,7 +218,7 @@
         <div class="product" data-name="حذاء رياضي نسائي" data-price="2000">
           <img src="https://via.placeholder.com/300x220.png?text=حذاء+1" alt="حذاء رياضي">
           <h3>حذاء رياضي نسائي</h3>
-          <p>السعر: 2000 دج</p>
+          <p class="price">السعر: 2000 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
       </div>
@@ -180,61 +249,7 @@
   </footer>
 
   <!-- Script -->
-  <script>
-    const cart = [];
-    const cartCount = document.getElementById('cart-count');
-    const viewCart = document.getElementById('view-cart');
-    const cartModal = document.getElementById('cart-modal');
-    const closeCart = document.getElementById('close-cart');
-    const cartItems = document.getElementById('cart-items');
-    const cartTotal = document.getElementById('cart-total');
-    const clearCartBtn = document.getElementById('clear-cart');
+  <script src="cart.js"></script>
 
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-      btn.addEventListener('click', e => {
-        const product = e.target.closest('.product');
-        const name = product.dataset.name;
-        const price = parseInt(product.dataset.price);
-
-        cart.push({ name, price });
-        updateCartUI();
-      });
-    });
-
-    viewCart.addEventListener('click', e => {
-      e.preventDefault();
-      cartModal.style.display = 'flex';
-      updateCartUI();
-    });
-
-    closeCart.addEventListener('click', () => {
-      cartModal.style.display = 'none';
-    });
-
-    window.addEventListener('click', e => {
-      if (e.target === cartModal) {
-        cartModal.style.display = 'none';
-      }
-    });
-
-    clearCartBtn.addEventListener('click', () => {
-      cart.length = 0;
-      updateCartUI();
-    });
-
-    function updateCartUI() {
-      cartCount.textContent = cart.length;
-      cartItems.innerHTML = '';
-      let total = 0;
-      cart.forEach(item => {
-        const p = document.createElement('p');
-        p.textContent = `${item.name} - ${item.price} دج`;
-        cartItems.appendChild(p);
-        total += item.price;
-      });
-      cartTotal.textContent = `الإجمالي: ${total} دج`;
-    }
-  </script>
-<script src="cart.js"></script>
 </body>
-</html> 
+</html>

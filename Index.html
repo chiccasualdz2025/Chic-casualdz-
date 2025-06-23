@@ -99,7 +99,77 @@
     <p>© 2025 Chic Casual DZ - جميع الحقوق محفوظة</p>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- JavaScript inline -->
+  <script>
+    let cart = [];
+
+    const addToCartButtons = document.querySelectorAll(".add-to-cart");
+    const cartCount = document.getElementById("cart-count");
+    const viewCartBtn = document.getElementById("view-cart");
+    const cartModal = document.getElementById("cart-modal");
+    const closeCartBtn = document.getElementById("close-cart");
+    const cartItemsContainer = document.getElementById("cart-items");
+    const cartTotal = document.getElementById("cart-total");
+    const clearCartBtn = document.getElementById("clear-cart");
+
+    function updateCartCount() {
+      cartCount.textContent = cart.length;
+    }
+
+    function displayCartItems() {
+      cartItemsContainer.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>السلة فارغة.</p>";
+        cartTotal.textContent = "";
+        return;
+      }
+
+      cart.forEach((item) => {
+        const itemEl = document.createElement("div");
+        itemEl.classList.add("cart-item");
+        itemEl.innerHTML = \`
+          <img src="\${item.img}" width="60" />
+          <strong>\${item.name}</strong> - \${item.price} دج
+        \`;
+        cartItemsContainer.appendChild(itemEl);
+        total += item.price;
+      });
+
+      cartTotal.textContent = \`المجموع: \${total} دج\`;
+    }
+
+    viewCartBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      displayCartItems();
+      cartModal.classList.remove("hidden");
+    });
+
+    closeCartBtn.addEventListener("click", () => {
+      cartModal.classList.add("hidden");
+    });
+
+    clearCartBtn.addEventListener("click", () => {
+      cart = [];
+      updateCartCount();
+      displayCartItems();
+    });
+
+    addToCartButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const product = btn.closest(".product");
+        const id = product.dataset.id;
+        const name = product.dataset.name;
+        const price = parseInt(product.dataset.price);
+        const img = product.dataset.img;
+
+        cart.push({ id, name, price, img });
+        updateCartCount();
+        alert("تمت إضافة المنتج إلى السلة!");
+      });
+    });
+  </script>
 
 </body>
 </html>

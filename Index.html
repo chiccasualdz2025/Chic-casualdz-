@@ -16,6 +16,7 @@
       <a href="#clothing">ملابس</a>
       <a href="#shoes">أحذية</a>
       <a href="#contact">اتصل بنا</a>
+      <a href="#" id="view-cart">المشتريات (<span id="cart-count">0</span>)</a>
     </nav>
     <div class="cart">🛒</div>
   </header>
@@ -27,23 +28,28 @@
     <section class="category" id="clothing">
       <h2>الملابس</h2>
       <div class="products">
-        <div class="product">
+
+        <div class="product" data-id="1" data-name="فستان زهري بأزرار" data-price="1500" data-img="https://i.imgur.com/ua7TTiJ.jpg">
           <img src="https://i.imgur.com/ua7TTiJ.jpg" alt="فستان زهري أنيق">
           <h3>فستان زهري بأزرار</h3>
+          <p class="price">السعر: 1500 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
 
-        <div class="product">
+        <div class="product" data-id="2" data-name="قميص كاجوال" data-price="800" data-img="https://via.placeholder.com/300x220.png?text=قميص">
           <img src="https://via.placeholder.com/300x220.png?text=قميص" alt="قميص">
           <h3>قميص كاجوال</h3>
+          <p class="price">السعر: 800 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
 
-        <div class="product">
+        <div class="product" data-id="3" data-name="بنطال جينز خفيف" data-price="1200" data-img="https://via.placeholder.com/300x220.png?text=جينز">
           <img src="https://via.placeholder.com/300x220.png?text=جينز" alt="جينز">
           <h3>بنطال جينز خفيف</h3>
+          <p class="price">السعر: 1200 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
+
       </div>
     </section>
 
@@ -51,26 +57,41 @@
     <section class="category" id="shoes">
       <h2>الأحذية</h2>
       <div class="products">
-        <div class="product">
+
+        <div class="product" data-id="4" data-name="حذاء رياضي نسائي" data-price="2000" data-img="https://via.placeholder.com/300x220.png?text=حذاء+1">
           <img src="https://via.placeholder.com/300x220.png?text=حذاء+1" alt="حذاء رياضي">
           <h3>حذاء رياضي نسائي</h3>
+          <p class="price">السعر: 2000 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
 
-        <div class="product">
+        <div class="product" data-id="5" data-name="حذاء كعب عالي وردي" data-price="2500" data-img="https://via.placeholder.com/300x220.png?text=حذاء+2">
           <img src="https://via.placeholder.com/300x220.png?text=حذاء+2" alt="كعب عالي">
           <h3>حذاء كعب عالي وردي</h3>
+          <p class="price">السعر: 2500 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
+
       </div>
     </section>
 
   </main>
 
+  <!-- Cart Modal -->
+  <div id="cart-modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-btn" id="close-cart">&times;</span>
+      <h2>المشتريات</h2>
+      <div id="cart-items"></div>
+      <p id="cart-total"></p>
+      <button id="clear-cart">تفريغ السلة</button>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer id="contact">
-    <p>📞 الهاتف: 0794196602</p>
-    <p>📍 العنوان: البليدة سيدي عبد القادر </p>
+    <p>📞 الهاتف: 0555 12 34 56</p>
+    <p>📍 العنوان: الجزائر العاصمة، باب الزوار</p>
     <p>📱 تابعنا: 
       <a href="https://www.instagram.com/yourpage" target="_blank">إنستغرام</a> | 
       <a href="https://www.facebook.com/yourpage" target="_blank">فيسبوك</a>
@@ -78,36 +99,7 @@
     <p>© 2025 Chic Casual DZ - جميع الحقوق محفوظة</p>
   </footer>
 
-  <script>
-    const cartIcon = document.querySelector('.cart');
-    let cartCount = 0;
+  <script src="script.js"></script>
 
-    function updateCartCount() {
-      let countSpan = cartIcon.querySelector('.count');
-      if (!countSpan) {
-        countSpan = document.createElement('span');
-        countSpan.classList.add('count');
-        countSpan.style.position = 'absolute';
-        countSpan.style.top = '-5px';
-        countSpan.style.right = '-5px';
-        countSpan.style.background = '#ff4081';
-        countSpan.style.color = '#fff';
-        countSpan.style.borderRadius = '50%';
-        countSpan.style.padding = '2px 6px';
-        countSpan.style.fontSize = '0.75em';
-        countSpan.style.fontWeight = 'bold';
-        cartIcon.appendChild(countSpan);
-      }
-      countSpan.textContent = cartCount;
-    }
-
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-      button.addEventListener('click', () => {
-        cartCount++;
-        updateCartCount();
-        alert('تمت إضافة المنتج إلى السلة!');
-      });
-    });
-  </script>
 </body>
 </html>

@@ -1,75 +1,106 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chic Casual DZ</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chic Casual DZ</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">Chic Casual DZ</div>
-    <nav>
-      <a href="#">الرئيسية</a>
-      <a href="#clothing">ملابس</a>
-      <a href="#shoes">أحذية</a>
-      <a href="#">اتصل بنا</a>
-    </nav>
-    <div class="cart">🛒</div>
-  </header>
+  <!-- Header -->
+  <header>
+    <div class="logo">Chic Casual DZ</div>
+    <nav>
+      <a href="#">الرئيسية</a>
+      <a href="#clothing">ملابس</a>
+      <a href="#shoes">أحذية</a>
+      <a href="#">اتصل بنا</a>
+    </nav>
+    <div class="cart">🛒</div>
+  </header>
 
-  <!-- Main Content -->
-  <main>
+  <!-- Main Content -->
+  <main>
 
-    <!-- Clothing Category -->
-    <section class="category" id="clothing">
-      <h2>الملابس</h2>
-      <div class="products">
+    <!-- Clothing Category -->
+    <section class="category" id="clothing">
+      <h2>الملابس</h2>
+      <div class="products">
 
-        <div class="product">
-          <img src="https://via.placeholder.com/300x220.png?text=فستان" alt="فستان">
-          <h3>فستان صيفي أنيق</h3>
-          <button class="add-to-cart">أضف إلى السلة</button>
-        </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/300x220.png?text=فستان" alt="فستان">
+          <h3>فستان صيفي أنيق</h3>
+          <button class="add-to-cart">أضف إلى السلة</button>
+        </div>
 
-        <div class="product">
-          <img src="https://via.placeholder.com/300x220.png?text=قميص" alt="قميص">
-          <h3>قميص كاجوال</h3>
-          <button class="add-to-cart">أضف إلى السلة</button>
-        </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/300x220.png?text=قميص" alt="قميص">
+          <h3>قميص كاجوال</h3>
+          <button class="add-to-cart">أضف إلى السلة</button>
+        </div>
 
-        <div class="product">
-          <img src="https://via.placeholder.com/300x220.png?text=جينز" alt="جينز">
-          <h3>بنطال جينز خفيف</h3>
-          <button class="add-to-cart">أضف إلى السلة</button>
-        </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/300x220.png?text=جينز" alt="جينز">
+          <h3>بنطال جينز خفيف</h3>
+          <button class="add-to-cart">أضف إلى السلة</button>
+        </div>
 
-      </div>
-    </section>
+      </div>
+    </section>
 
-    <!-- Shoes Category -->
-    <section class="category" id="shoes">
-      <h2>الأحذية</h2>
-      <div class="products">
+    <!-- Shoes Category -->
+    <section class="category" id="shoes">
+      <h2>الأحذية</h2>
+      <div class="products">
 
-        <div class="product">
-          <img src="https://via.placeholder.com/300x220.png?text=حذاء+1" alt="حذاء رياضي">
-          <h3>حذاء رياضي نسائي</h3>
-          <button class="add-to-cart">أضف إلى السلة</button>
-        </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/300x220.png?text=حذاء+1" alt="حذاء رياضي">
+          <h3>حذاء رياضي نسائي</h3>
+          <button class="add-to-cart">أضف إلى السلة</button>
+        </div>
 
-        <div class="product">
-          <img src="https://via.placeholder.com/300x220.png?text=حذاء+2" alt="كعب عالي">
-          <h3>حذاء كعب عالي وردي</h3>
-          <button class="add-to-cart">أضف إلى السلة</button>
-        </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/300x220.png?text=حذاء+2" alt="كعب عالي">
+          <h3>حذاء كعب عالي وردي</h3>
+          <button class="add-to-cart">أضف إلى السلة</button>
+        </div>
 
-      </div>
-    </section>
+      </div>
+    </section>
 
-  </main>
+  </main>
 
+  <script>
+    const cartIcon = document.querySelector('.cart');
+    let cartCount = 0;
+
+    function updateCartCount() {
+      let countSpan = cartIcon.querySelector('.count');
+      if (!countSpan) {
+        countSpan = document.createElement('span');
+        countSpan.classList.add('count');
+        countSpan.style.position = 'absolute';
+        countSpan.style.top = '0';
+        countSpan.style.right = '0';
+        countSpan.style.background = '#ff4081';
+        countSpan.style.color = '#fff';
+        countSpan.style.borderRadius = '50%';
+        countSpan.style.padding = '2px 6px';
+        countSpan.style.fontSize = '0.8em';
+        countSpan.style.fontWeight = 'bold';
+        cartIcon.appendChild(countSpan);
+      }
+      countSpan.textContent = cartCount;
+    }
+
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('click', () => {
+        cartCount++;
+        updateCartCount();
+        alert('تمت إضافة المنتج إلى السلة!');
+      });
+    });
+  </script>
 </body>
 </html>

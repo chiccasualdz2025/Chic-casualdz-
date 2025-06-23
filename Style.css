@@ -1,105 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
-
 body {
-  font-family: 'Cairo', 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   margin: 0;
-  background-image: url("https://images.unsplash.com/photo-1570700005880-4ecdb8595d4a?auto=format&fit=crop&w=1920&q=80");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: url("https://images.unsplash.com/photo-1570700005880-4ecdb8595d4a?auto=format&fit=crop&w=1920&q=80") center/cover no-repeat fixed;
   color: #333;
 }
-
 main, header {
-  background-color: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(7px);
   border-radius: 10px;
   margin: 10px;
   padding: 15px 30px;
 }
-
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
 header .logo {
   font-size: 1.5em;
   font-weight: bold;
   color: #ff4081;
 }
-
 nav a {
   margin: 0 10px;
   text-decoration: none;
   color: #333;
   cursor: pointer;
+  transition: color 0.3s;
 }
+nav a:hover { color: #ff4081; }
+.cart { position: relative; font-size: 1.2em; }
 
-nav a:hover {
-  color: #ff4081;
-}
-
-.cart {
-  position: relative;
-  font-size: 1.2em;
-}
-
-main {
-  padding: 20px 30px;
-}
-
-.category {
-  margin: 30px 0;
-}
-
+.category { margin: 30px 0; }
 .category h2 {
   font-size: 1.4em;
   border-bottom: 2px solid #eee;
   padding-bottom: 10px;
 }
-
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 25px;
 }
-
 .product {
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
   text-align: center;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
   background-color: #fff;
   position: relative;
+  transition: box-shadow 0.3s, transform 0.3s;
 }
-
 .product:hover {
   box-shadow: 0 6px 16px rgba(0,0,0,0.15);
   transform: translateY(-5px);
 }
-
 .product img {
   width: 100%;
   height: 220px;
   object-fit: cover;
 }
-
-.product h3 {
-  font-size: 1em;
-  margin: 10px 0 5px 0;
-}
-
-.price {
-  margin: 0 0 10px 0;
-  color: #666;
-  font-weight: bold;
-}
-
+.product h3 { font-size: 1em; margin: 10px 0 5px 0; }
+.price { margin: 0 0 10px 0; color: #666; font-weight: bold; }
 .add-to-cart {
   background-color: #ff4081;
   color: #fff;
@@ -108,103 +71,12 @@ main {
   margin-bottom: 15px;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
+.add-to-cart:hover { background-color: #e73370; }
 
-.add-to-cart:hover {
-  background-color: #e73370;
-}
-
-/* Modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-}
-
-.close-btn {
-  position: absolute;
-  top: 10px;
-  left: 15px;
-  font-size: 1.5em;
-  color: #999;
-  cursor: pointer;
-}
-
-.close-btn:hover {
-  color: #333;
-}
-
-#clear-cart {
-  background-color: #888;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  margin-top: 15px;
-  cursor: pointer;
-}
-
-#clear-cart:hover {
-  background-color: #555;
-}
-
-/* نموذج إرسال الطلب */
-#send-order {
-  margin: 40px auto;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 25px;
-  border-radius: 10px;
-  max-width: 600px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-#send-order form input,
-#send-order form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-family: inherit;
-  font-size: 1em;
-}
-
-#send-order form button {
-  background-color: #ff4081;
-  color: white;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#send-order form button:hover {
-  background-color: #e73370;
-}
-
-/* Footer */
 footer {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(3px);
   text-align: center;
   padding: 20px;
@@ -213,13 +85,85 @@ footer {
   font-size: 0.95em;
   color: #333;
 }
-
 footer a {
   color: #ff4081;
   text-decoration: none;
   margin: 0 5px;
 }
+footer a:hover { text-decoration: underline; }
 
-footer a:hover {
-  text-decoration: underline;
+/* Modal */
+.modal {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: none; justify-content: center; align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%; max-width: 500px; max-height: 80vh;
+  overflow-y: auto; position: relative;
+}
+.close-btn {
+  position: absolute; right: 15px; top: 10px;
+  font-size: 24px; font-weight: bold; cursor: pointer; color: #999;
+}
+.close-btn:hover { color: #ff4081; }
+#cart-items p { margin: 8px 0; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+#cart-total { font-weight: bold; margin-top: 15px; color: #ff4081; }
+#clear-cart {
+  margin-top: 15px; background-color: #ff4081; color: white;
+  border: none; padding: 10px 15px; border-radius: 5px;
+  cursor: pointer; font-weight: 600;
+}
+#clear-cart:hover { background-color: #e03670; }
+
+/* إشعار */
+#notification {
+  visibility: hidden;
+  min-width: 200px;
+  background: #ff4081;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  position: fixed; z-index: 2000;
+  top: 20px; left: 50%; transform: translateX(-50%);
+  font-size: 1em;
+  transition: visibility 0.2s, opacity 0.2s;
+  opacity: 0;
+}
+#notification.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* نموذج إرسال الطلب */
+#send-order {
+  background-color: rgba(255,255,255,0.88);
+  margin: 20px 10px;
+  border-radius: 10px;
+  padding: 20px 25px;
+}
+#send-order h2 { color: #ff4081; margin-bottom: 15px; }
+#send-order input, #send-order textarea {
+  width: 100%; padding: 10px; margin: 8px 0 15px 0;
+  border: 1px solid #ccc; border-radius: 5px;
+  font-size: 1em; box-sizing: border-box;
+}
+#send-order button[type="submit"] {
+  background-color: #ff4081;
+  color: white; padding: 12px 20px; border: none;
+  border-radius: 5px; cursor: pointer; font-weight: 600; font-size: 1.1em;
+  transition: background-color 0.3s;
+}
+#send-order button[type="submit"]:hover { background-color: #e03670; }
+
+@media (max-width: 600px) {
+  .products { grid-template-columns: 1fr; }
+  main, header { padding: 10px; }
+  .modal-content { width: 98%; padding: 10px; }
 }

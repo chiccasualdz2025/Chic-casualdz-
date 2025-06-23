@@ -56,6 +56,7 @@ function clearCart() {
 document.addEventListener('DOMContentLoaded', () => {
   loadCart();
 
+  // زر إضافة إلى السلة
   document.querySelectorAll('.add-to-cart').forEach(btn => {
     btn.addEventListener('click', e => {
       const product = e.target.closest('.product');
@@ -65,20 +66,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // عرض السلة
   document.getElementById('view-cart').addEventListener('click', e => {
     e.preventDefault();
     showCart();
   });
 
+  // إغلاق نافذة السلة
   document.getElementById('close-cart').addEventListener('click', () => {
     document.getElementById('cart-modal').style.display = 'none';
   });
 
+  // تفريغ السلة
   document.getElementById('clear-cart').addEventListener('click', clearCart);
 
+  // إغلاق السلة عند الضغط خارجها
   window.addEventListener('click', e => {
     if (e.target === document.getElementById('cart-modal')) {
       document.getElementById('cart-modal').style.display = 'none';
     }
+  });
+
+  // ✅ EmailJS
+  emailjs.init("MxN-ML5SwEtO17Esp");
+
+  // إرسال الطلب
+  document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    if (cart.length === 0) {
+      alert("⚠️ لا يمكن إرسال الطلب. السلة فارغة.");
+      return;
+    }
+
+    // تلخيص محتوى السلة
+    let summary = cart.map(item => `${item.name} - ${item.price} دج`).join("\n");
+    let total = cart.reduce((sum, item) => sum + item.price, 0);
+    summary += `\n\n📦 الإجمالي: ${total} دج`;
+
+    // تمرير ملخص السلة إلى الحقل المخفي
+    document.getElementById("cart-summary").value = summary;
+
+    // إرسال عبر EmailJS
+    emailjs.sendForm("service_o7uhqey", "template_g8sr0vu", this)
+      .then(() => {
+        alert("✅ تم إرسال الطلب بنجاح!");
+        clearCart();
+        this.reset();
+      }, (error) => {
+        console.error("EmailJS error:", error);
+        alert("❌ حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
+      });
   });
 });

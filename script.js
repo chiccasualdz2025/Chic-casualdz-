@@ -39,6 +39,7 @@ function renderCart() {
     itemsDiv.innerHTML = html;
     document.getElementById('cart-total').innerText = "المجموع: " + total + " دج";
 }
+
 function removeFromCart(idx) {
     cart.splice(idx, 1);
     saveCart(cart);
@@ -49,16 +50,26 @@ function removeFromCart(idx) {
 function addToCart(product) {
     let found = cart.find(p => p.name === product.name);
     if (found) found.qty += 1;
-    else cart.push({...product, qty: 1});
+    else cart.push({ ...product, qty: 1 });
     saveCart(cart);
     updateCartCount();
     showNotification("تم إضافة المنتج للسلة!");
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    // أزرار الإضافة للسلة
+// تحميل مكتبة EmailJS وتفعيلها
+(function () {
+    const script = document.createElement('script');
+    script.src = "https://cdn.emailjs.com/sdk/3.2.0/email.min.js";
+    script.onload = function () {
+        emailjs.init('MxN-ML5SwEtO17Esp'); // Public Key
+    };
+    document.head.appendChild(script);
+})();
+
+// الأحداث الرئيسية
+document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const p = this.closest('.product');
             addToCart({
                 name: p.getAttribute('data-name'),
@@ -67,56 +78,58 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // فتح نافذة السلة
-    document.getElementById('view-cart').onclick = function(e) {
+    document.getElementById('view-cart').onclick = function (e) {
         e.preventDefault();
         renderCart();
         document.getElementById('cart-modal').style.display = 'flex';
     };
-    // إغلاق نافذة السلة
-    document.getElementById('close-cart').onclick = function() {
+
+    document.getElementById('close-cart').onclick = function () {
         document.getElementById('cart-modal').style.display = 'none';
     };
-    // تفريغ السلة
-    document.getElementById('clear-cart').onclick = function() {
+
+    document.getElementById('clear-cart').onclick = function () {
         cart = [];
         saveCart(cart);
         updateCartCount();
         renderCart();
     };
 
-    // تحديث عداد السلة عند التحميل
-    updateCartCount();
-
-    // إرسال الطلب
-    document.getElementById('contact-form').onsubmit = function(e) {
+    // عند إرسال النموذج
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
         e.preventDefault();
+
         if (cart.length === 0) {
             showNotification("أضف منتجات للسلة أولاً!");
             return;
         }
+
+        // إعداد ملخص السلة
         let summary = cart.map(p => `${p.name} × ${p.qty} = ${p.price * p.qty} دج`).join('\n');
         document.getElementById('cart-summary').value = summary;
-        // هنا يمكن ربط إرسال البيانات مع خدمة مثل EmailJS
-        showNotification("تم إرسال طلبك بنجاح! سنتواصل معك قريبًا.");
-        cart = [];
-        saveCart(cart);
-        updateCartCount();
-        renderCart();
-        this.reset();
-    };
 
-    // ** كود قائمة الهامبرغر **
-    const menuIcon = document.getElementById('menu-icon');
-    const navLinks = document.getElementById('nav-links');
+        const formData = {
+            user_name: this.user_name.value,
+            user_email: this.user_email.value,
+            message: this.message.value,
+            cart_summary: summary
+        };
 
-    menuIcon.addEventListener('click', function() {
-        navLinks.classList.toggle('show');
+        // إرسال الطلب عبر EmailJS
+        emailjs.send('service_o7uhqey', 'template_g8sr0vu', formData)
+            .then(() => {
+                showNotification("✅ تم إرسال طلبك بنجاح! سنتواصل معك قريبًا.");
+                cart = [];
+                saveCart(cart);
+                updateCartCount();
+                renderCart();
+                this.reset();
+            }, (error) => {
+                console.error('EmailJS Error:', error);
+                showNotification("❌ حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
+            });
     });
 
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('show');
-        });
-    });
+    // تحديث العداد عند التحميل
+    updateCartCount();
 });

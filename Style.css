@@ -16,68 +16,76 @@ header {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  position: relative; /* ضروري لتحديد موقع القائمة المتحركة */
 }
 header .logo {
   font-size: 1.5em;
   font-weight: bold;
   color: #ff4081;
 }
-nav a {
-  margin: 0 10px;
-  text-decoration: none;
-  color: #333;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-nav a:hover { color: #ff4081; }
-.cart { position: relative; font-size: 1.2em; }
 
-/* روابط التنقل */
+/* تنسيق قائمة التنقل */
+nav {
+  position: relative;
+}
+#menu-icon {
+  display: none;
+  font-size: 2em;
+  cursor: pointer;
+  user-select: none;
+  color: #ff4081;
+}
 #nav-links {
   display: flex;
   gap: 15px;
   align-items: center;
 }
-
-/* زر القائمة - مخفي على الشاشات الكبيرة */
-.menu-icon {
-  display: none;
-  font-size: 1.8em;
+#nav-links a {
+  text-decoration: none;
+  color: #333;
   cursor: pointer;
+  transition: color 0.3s;
+}
+#nav-links a:hover {
   color: #ff4081;
-  user-select: none;
 }
 
-/* القائمة المتحركة للشاشات الصغيرة */
+/* عداد السلة */
+.cart { 
+  position: relative; 
+  font-size: 1.2em; 
+}
+
+/* عرض القائمة على الشاشات الصغيرة */
 @media (max-width: 768px) {
+  #menu-icon {
+    display: block;
+  }
   #nav-links {
-    display: none; /* نخفي القائمة الافتراضية */
-    flex-direction: column;
-    background: rgba(255, 255, 255, 0.9);
+    display: none;
     position: absolute;
-    right: 10px;
-    top: 55px;
+    top: 45px;
+    right: 0;
+    background-color: rgba(255,255,255,0.95);
+    flex-direction: column;
+    width: 200px;
     border-radius: 8px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    padding: 10px 15px;
-    z-index: 1100;
-    width: 160px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 10px 0;
+    z-index: 999;
   }
-
   #nav-links.show {
-    display: flex; /* عند الفتح تظهر القائمة */
+    display: flex;
   }
-
-  .menu-icon {
-    display: block; /* إظهار زر القائمة */
+  #nav-links a {
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
   }
-
-  nav a {
-    margin: 10px 0;
+  #nav-links a:last-child {
+    border-bottom: none;
   }
 }
 
+/* باقي الكود كما هو... */
 .category { margin: 30px 0; }
 .category h2 {
   font-size: 1.4em;

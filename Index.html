@@ -13,7 +13,7 @@
   <header>
     <div class="logo">Chic Casual DZ</div>
     <nav>
-      <span id="menu-toggle" class="menu-icon">☰ القائمة</span>
+      <div id="menu-icon" class="menu-icon">&#9776;</div>
       <div id="nav-links">
         <a href="#">الرئيسية</a>
         <a href="#clothing">ملابس</a>
@@ -30,13 +30,13 @@
     <section class="category" id="clothing">
       <h2>الملابس</h2>
       <div class="products">
-        <div class="product" data-id="p1" data-name="فستان زهري بأزرار" data-price="1500">
+        <div class="product" data-name="فستان زهري بأزرار" data-price="1500">
           <img src="https://i.imgur.com/ua7TTiJ.jpg" alt="فستان زهري" />
           <h3>فستان زهري بأزرار</h3>
           <p class="price">السعر: 1500 دج</p>
           <button class="add-to-cart">أضف إلى السلة</button>
         </div>
-        <div class="product" data-id="p2" data-name="قميص كاجوال" data-price="800">
+        <div class="product" data-name="قميص كاجوال" data-price="800">
           <img src="https://via.placeholder.com/300x220.png?text=قميص" alt="قميص" />
           <h3>قميص كاجوال</h3>
           <p class="price">السعر: 800 دج</p>
@@ -48,7 +48,7 @@
     <section class="category" id="shoes">
       <h2>الأحذية</h2>
       <div class="products">
-        <div class="product" data-id="p3" data-name="حذاء رياضي نسائي" data-price="2000">
+        <div class="product" data-name="حذاء رياضي نسائي" data-price="2000">
           <img src="https://via.placeholder.com/300x220.png?text=حذاء+1" alt="حذاء رياضي" />
           <h3>حذاء رياضي نسائي</h3>
           <p class="price">السعر: 2000 دج</p>
@@ -61,16 +61,17 @@
       <h2>📦 إرسال طلب شراء</h2>
       <form id="contact-form">
         <label for="user_name">الاسم:</label><br />
-        <input type="text" name="user_name" id="user_name" required /><br />
+        <input type="text" name="user_name" required /><br />
         <label for="user_email">البريد الإلكتروني:</label><br />
-        <input type="email" name="user_email" id="user_email" required /><br />
+        <input type="email" name="user_email" required /><br />
         <label for="message">العنوان / الملاحظات:</label><br />
-        <textarea name="message" id="message" required rows="4"></textarea><br />
+        <textarea name="message" required rows="4"></textarea><br />
         <input type="hidden" name="cart_summary" id="cart-summary" />
         <button type="submit">إرسال الطلب</button>
       </form>
     </section>
   </main>
+
   <!-- Cart Modal -->
   <div class="modal" id="cart-modal">
     <div class="modal-content">
@@ -81,6 +82,7 @@
       <button id="clear-cart">تفريغ السلة</button>
     </div>
   </div>
+
   <!-- Footer -->
   <footer>
     <p>📞 الهاتف: 0555 12 34 56</p>
@@ -94,6 +96,7 @@
       جميع الحقوق محفوظة &copy; Chic Casual DZ
     </p>
   </footer>
+
   <script src="script.js"></script>
 </body>
 </html>

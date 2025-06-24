@@ -16,6 +16,7 @@ header {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative; /* ضروري لتحديد موقع القائمة المتحركة */
 }
 header .logo {
   font-size: 1.5em;
@@ -31,6 +32,51 @@ nav a {
 }
 nav a:hover { color: #ff4081; }
 .cart { position: relative; font-size: 1.2em; }
+
+/* روابط التنقل */
+#nav-links {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* زر القائمة - مخفي على الشاشات الكبيرة */
+.menu-icon {
+  display: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  color: #ff4081;
+  user-select: none;
+}
+
+/* القائمة المتحركة للشاشات الصغيرة */
+@media (max-width: 768px) {
+  #nav-links {
+    display: none; /* نخفي القائمة الافتراضية */
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    right: 10px;
+    top: 55px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    padding: 10px 15px;
+    z-index: 1100;
+    width: 160px;
+  }
+
+  #nav-links.show {
+    display: flex; /* عند الفتح تظهر القائمة */
+  }
+
+  .menu-icon {
+    display: block; /* إظهار زر القائمة */
+  }
+
+  nav a {
+    margin: 10px 0;
+  }
+}
 
 .category { margin: 30px 0; }
 .category h2 {
